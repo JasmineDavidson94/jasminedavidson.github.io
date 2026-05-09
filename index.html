@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jasmine Davidson</title>
 
     <style>
@@ -13,38 +13,44 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: Helvetica, Arial, sans-serif;
             background: #ffffff;
             color: #222;
-            line-height: 1.55;
+            line-height: 1.6;
             font-size: 14px;
         }
 
         .container {
-            max-width: 980px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 22px 25px;
+            padding: 24px;
         }
 
         .top-nav {
+            position: sticky;
+            top: 0;
             background: #ffffff;
-            padding: 10px 0 12px 0;
-            margin-bottom: 24px;
             z-index: 1000;
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 30px;
         }
 
         .top-nav a {
             color: #555;
             text-decoration: none;
             font-size: 14px;
-            font-weight: normal;
-            margin-right: 22px;
+            margin-right: 24px;
+            transition: 0.2s ease;
         }
 
         .top-nav a:hover {
             color: #000;
-            text-decoration: underline;
         }
 
         .top-nav a.active {
@@ -55,75 +61,73 @@
 
         .layout {
             display: flex;
-            gap: 42px;
+            gap: 50px;
             align-items: flex-start;
         }
 
         .sidebar {
-            width: 220px;
-            min-width: 220px;
+            width: 260px;
+            min-width: 260px;
             position: sticky;
-            top: 22px;
+            top: 90px;
         }
 
         .profile-photo {
-            width: 175px;
-            height: 175px;
+            width: 190px;
+            height: 190px;
             object-fit: cover;
-            object-position: center center;
+            object-position: center;
             border-radius: 50%;
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 18px;
         }
 
         .sidebar h2 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             line-height: 1.2;
         }
 
         .sidebar p {
             color: #555;
-            margin-bottom: 8px;
             font-size: 13px;
-            line-height: 1.35;
+            margin-bottom: 12px;
+            line-height: 1.45;
         }
 
         .content {
             flex: 1;
-            max-width: 700px;
+            max-width: 760px;
         }
 
-        .page-section {
-            display: none;
-        }
-
-        .page-section.active {
-            display: block;
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 90px;
         }
 
         h1 {
-            font-size: 28px;
-            margin-bottom: 14px;
+            font-size: 30px;
+            margin-bottom: 18px;
             font-weight: 600;
         }
 
         h2 {
-            font-size: 20px;
-            margin-top: 22px;
-            margin-bottom: 9px;
+            font-size: 22px;
+            margin-top: 28px;
+            margin-bottom: 12px;
             font-weight: 600;
         }
 
         h3 {
-            font-size: 17px;
-            margin-bottom: 7px;
+            font-size: 18px;
+            margin-top: 18px;
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
         p {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         a {
@@ -135,48 +139,47 @@
             text-decoration: underline;
         }
 
-        .updates-list {
-            margin-left: 34px;
-            padding-left: 12px;
-            margin-top: 8px;
-        }
-
-        .updates-list li {
-            margin-bottom: 8px;
-            padding-left: 4px;
-        }
-
         .bio-list {
-            margin-left: 22px;
-            margin-top: -6px;
-            margin-bottom: 12px;
-            padding-left: 18px;
+            margin-left: 24px;
+            margin-top: -4px;
+            margin-bottom: 16px;
+            padding-left: 16px;
         }
 
         .bio-list li {
-            margin-bottom: 4px;
-            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+
+        .updates-list {
+            margin-left: 28px;
+            margin-top: 10px;
+            padding-left: 12px;
+        }
+
+        .updates-list li {
+            margin-bottom: 12px;
         }
 
         .publication {
-            margin-bottom: 22px;
+            margin-bottom: 28px;
         }
 
         .publication-title {
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .publication-authors {
             color: #555;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .contact-links a {
-            margin-right: 14px;
+            margin-right: 16px;
         }
 
-        @media (max-width: 850px) {
+        @media (max-width: 900px) {
+
             .layout {
                 flex-direction: column;
             }
@@ -186,16 +189,17 @@
                 min-width: 100%;
                 position: relative;
                 top: 0;
+                margin-bottom: 30px;
             }
 
             .profile-photo {
-                width: 165px;
-                height: 165px;
+                width: 160px;
+                height: 160px;
             }
 
-            .top-nav a {
-                display: inline-block;
-                margin-bottom: 8px;
+            .top-nav {
+                overflow-x: auto;
+                white-space: nowrap;
             }
         }
     </style>
@@ -206,10 +210,10 @@
     <div class="container">
 
         <nav class="top-nav">
-            <a href="#about" class="nav-link active" data-page="about">About</a>
-            <a href="#publications" class="nav-link" data-page="publications">Publications</a>
-            <a href="#teaching" class="nav-link" data-page="teaching">Teaching</a>
-            <a href="#contact" class="nav-link" data-page="contact">Contact</a>
+            <a href="#about" class="nav-link active">About</a>
+            <a href="#publications" class="nav-link">Publications</a>
+            <a href="#teaching" class="nav-link">Teaching</a>
+            <a href="#contact" class="nav-link">Contact</a>
         </nav>
 
         <div class="layout">
@@ -217,8 +221,8 @@
             <aside class="sidebar">
 
                 <img src="images/IMG_4056.jpg"
-                     alt="Jasmine Davidson"
-                     class="profile-photo">
+                    alt="Jasmine Davidson"
+                    class="profile-photo">
 
                 <h2>Jasmine Davidson</h2>
 
@@ -238,7 +242,9 @@
 
             <main class="content">
 
-                <section id="about" class="page-section active">
+                <!-- ABOUT -->
+
+                <section id="about">
 
                     <h1>Jasmine Davidson, MSCS, MBA</h1>
 
@@ -247,20 +253,18 @@
                     </p>
 
                     <p>
-                        My academic background includes a doctoral degree in progress in Human-Centered Computing from Clemson University and dual master degrees in Computer Science and Business. I hold a Master of Science in Computer Science from Clemson University (Fall 2024), a Master of Business Administration with a concentration in Management and Strategy from South University (Spring 2019), and a Bachelor of Arts in Liberal Studies with minors in Psychology and Business from Winston-Salem State University (Fall 2016).
+                        My academic background includes a doctoral degree in progress in Human-Centered Computing from Clemson University and dual master degrees in Computer Science and Business.
                     </p>
 
                     <p>
-                        Currently a Technology Analyst at Nationwide, I lead the translation of business needs into technology solutions, partnering across product, engineering, and stakeholders to deliver high-impact outcomes. My work focuses on evaluating emerging technologies, improving processes, and shaping solutions that align with long-term strategic goals.
+                        Currently a Technology Analyst at Nationwide, I lead the translation of business needs into technology solutions, partnering across product, engineering, and stakeholders to deliver high-impact outcomes.
                     </p>
 
                     <p>
-                        What differentiates my background is a deep foundation in Human-Centered AI and AI system design. Through my research and applied experience, I’ve developed frameworks for evaluating AI systems across performance, usability, ethics, and risk—ensuring solutions are not only technically sound, but also responsible and effective in real-world environments.
+                        What differentiates my background is a deep foundation in Human-Centered AI and AI system design.
                     </p>
 
-                    <p>
-                        I bring a unique combination of:
-                    </p>
+                    <p>I bring a unique combination of:</p>
 
                     <ul class="bio-list">
                         <li>Technical depth (MS in Computer Science)</li>
@@ -268,49 +272,110 @@
                         <li>Applied experience in AI, data, and enterprise systems</li>
                     </ul>
 
-                    <p>
-                        I’m particularly interested in opportunities to contribute to:
-                    </p>
+                    <p>I’m particularly interested in opportunities to contribute to:</p>
 
                     <ul class="bio-list">
                         <li>AI / ML Product Management</li>
                         <li>Emerging Technology & Innovation</li>
                         <li>Responsible AI & AI Governance</li>
-                        <li>Digital Transformation initiatives</li>
+                        <li>Digital Transformation Initiatives</li>
                     </ul>
 
                     <p>
                         My goal is to drive AI-enabled products and strategies that create measurable business value while improving how people interact with technology.
                     </p>
 
-                    <p>
-                        Let’s connect if you're building in AI, product innovation, or digital transformation.
-                    </p>
-
-                    <h2>Updates:</h2>
+                    <h2>Updates</h2>
 
                     <ul class="updates-list">
+
                         <li>
-                            <strong>June 2026—</strong>
+                            <strong>June 2026 —</strong>
                             Participating in the
                             <a href="https://www.databricks.com/dataaisummit/">
                                 Databricks Data + AI Summit
-                            </a> live from San Francisco, CA!
+                            </a>
+                            in San Francisco, CA.
                         </li>
 
                         <li>
-                            <strong>April 2026—</strong>
-                            Passed the Qualifying Exams for the Ph.D. program in Computer Science and Engineering at The Ohio State University!
+                            <strong>April 2026 —</strong>
+                            Passed qualifying exams for the Ph.D. program in Computer Science and Engineering at The Ohio State University.
                         </li>
 
                         <li>
-                            <strong>February 2026—</strong>
-                            Promoted to Specialist, Databricks Engineer at Nationwide!
-                            <a href="https://www.linkedin.com/posts/vincent-davidson-1b09a1bb_im-happy-to-share-that-ive-been-promoted-activity-7432881523097296896-kEeO">
-                                Learn more
-                            </a>.
+                            <strong>February 2026 —</strong>
+                            Promoted to Specialist, Databricks Engineer at Nationwide.
                         </li>
+
                     </ul>
+
+                </section>
+
+                <!-- PUBLICATIONS -->
+
+                <section id="publications">
+
+                    <h1>Publications</h1>
+
+                    <div class="publication">
+
+                        <div class="publication-title">
+                            Application of Human Centered Reinforcement Learning to Develop an Air Battle Management Operator Digital Twin
+                        </div>
+
+                        <div class="publication-authors">
+                            Courtney L. Crooks, Jasmine Davidson, Vincent Davidson,
+                            Patrick Tyne, Katy Wills, Peter Lebedev, Tyler Rowe,
+                            Eric Tang, and Jessica Inman
+                        </div>
+
+                        <p>Springer, 2024</p>
+
+                        <p>
+                            <a href="https://link.springer.com/chapter/10.1007/978-3-031-94937-1_2">
+                                Read on Springer →
+                            </a>
+                        </p>
+
+                    </div>
+
+                </section>
+
+                <!-- TEACHING -->
+
+                <section id="teaching">
+
+                    <h1>Teaching</h1>
+
+                    <h3>Spring 2026</h3>
+
+                    <p>
+                        Unlocking Generative AI (ENGR 2194)<br>
+                        Python Perspectives (COMPEDU 2194)
+                    </p>
+
+                    <h3>Fall 2025</h3>
+
+                    <p>
+                        Unlocking Generative AI (ENGR 2194)<br>
+                        Python Perspectives (COMPEDU 2194)
+                    </p>
+
+                </section>
+
+                <!-- CONTACT -->
+
+                <section id="contact">
+
+                    <h1>Contact</h1>
+
+                    <p class="contact-links">
+                        <a href="mailto:jasminedavidson714@gmail.com">Gmail</a>
+                        <a href="mailto:mckell2@clemson.edu">Clemson Email</a>
+                        <a href="https://www.linkedin.com/">LinkedIn</a>
+                        <a href="https://github.com/">GitHub</a>
+                    </p>
 
                 </section>
 
@@ -319,6 +384,32 @@
         </div>
 
     </div>
+
+    <script>
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+
+            let current = "";
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+
+                if (link.getAttribute("href") === `#${current}`) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
 
 </body>
 
