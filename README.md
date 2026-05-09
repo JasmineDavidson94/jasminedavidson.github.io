@@ -1,2 +1,2 @@
-# vincentdavidson.github.io
-Personal Website
+# jasminedavidson.github.io
+Professional Website
